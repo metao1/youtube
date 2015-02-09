@@ -3,9 +3,19 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+
 h1{
-   text-align:"center";
-   direction:rtl;
+  text-align: right;
+  padding-right: 10px;
+  padding-right: 20px;
+  direction: rtl;
+}
+
+p{
+  text-align: right;
+  padding-right: 10px;
+  padding-right: 20px;
+  direction: rtl;
 }
 
 a {
