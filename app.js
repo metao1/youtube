@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.get('/nodetube', function(req, res){
+app.get('/tube', function(req, res){
   //Tell the request that we want to fetch youtube.com, send the results to a callback function
   request({uri: 'http://www.youtube.com/user/KompasTVInspirasi/videos'}, function(err, response, body){
     var self = this;
@@ -64,7 +64,7 @@ app.get('/nodetube', function(req, res){
           
           //We have all we came for, now let's render our view
           res.render('list', {
-              title: 'NodeTube',
+              title: 'دنیای ویدیو',
               items: self.items
           });
       }
@@ -75,14 +75,14 @@ app.get('/nodetube', function(req, res){
 //Pass the video id to the video view
 app.get('/watch/:id', function(req, res){
 	res.render('video', {
-		title: 'Watch',
+		title: 'تماشا',
         vid: req.params.id
     });
 });
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error('یافت نشد');
     err.status = 404;
     next(err);
 });
