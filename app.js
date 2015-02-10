@@ -28,6 +28,49 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.get('/search/:sh' ,function(req,res){
+    var sh = req.params.sh;
+    request({uri: 'http://www.youtube.com/'+ sh +'/videos'}, function(err, response, body){
+    var self = this;
+    self.items = new Array();//I feel like I want to save my results in an array
+    //Just a basic error check
+    if(err && response.statusCode !== 200){console.log('Request error.');}
+    //Send the body param as the HTML code we will parse in jsdom
+    //also tell jsdom to attach jQuery in the scripts and loaded from jQuery.com
+    jsdom.env({
+      html: body,
+      scripts: ['https://code.jquery.com/jquery-2.1.1.min.js'],
+      done: function(err, window){
+        //Use jQuery just as in a regular HTML page
+        var $ = window.jQuery;
+        var $body = $('body');
+        var $videos = $body.find('.channels-content-item');
+           $videos.each(function (i, item) { 
+                var $a = $(item).find('.yt-lockup-thumbnail a'),
+                	$title = $(item).find('.yt-lockup-title a').text(),
+                	$time = $a.find('.video-time').text(),
+                    $img = $a.find('span.yt-thumb-clip img'); //thumbnail
+               
+					 //and add all that data to my items array
+                self.items[i] = {
+                    href: $a.attr('href'),
+                    title: $title.trim(),
+                    time: $time,
+                    thumbnail: $img.attr('src'),
+                    urlObj: url.parse($a.attr('href'), true) //parse our URL and the query string as well
+                };
+            });
+          
+          //We have all we came for, now let's render our view
+          res.render('list', {
+              title: 'دنیای ویدیو',
+              items: self.items
+          });
+      }
+    });
+  })
+});
+
 app.get('/tube', function(req, res){
   //Tell the request that we want to fetch youtube.com, send the results to a callback function
   request({uri: 'http://www.youtube.com/mtv/videos'}, function(err, response, body){
