@@ -5,10 +5,10 @@ block content
   p   #{title} 
 
   div 
-    form(action='/search')  
+    form(action='/search',method='post')  
       input(
         type='input'
-        name='search_box'
+        name='searchvalue'
       )
       input(
         value='جستجو'
