@@ -30,7 +30,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.get('/tube', function(req, res){
   //Tell the request that we want to fetch youtube.com, send the results to a callback function
-  request({uri: 'http://www.youtube.com/user/KompasTVInspirasi/videos'}, function(err, response, body){
+  request({uri: 'http://www.youtube.com/mtv/videos'}, function(err, response, body){
     var self = this;
     self.items = new Array();//I feel like I want to save my results in an array
  
