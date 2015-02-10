@@ -31,8 +31,6 @@ app.use('/users', users);
 
 app.post('/search' ,function(req,res){
     var sh = req.body.serachvalue;
-    res.send('<html>alert(' ')</html>');
-    /*
     request({uri: 'http://www.youtube.com/'+ sh +'/videos'}, function(err, response, body){
     var self = this;
     self.items = new Array();//I feel like I want to save my results in an array
@@ -72,7 +70,6 @@ app.post('/search' ,function(req,res){
       }
     });
   })
-  */
 });
 
 app.get('/tube', function(req, res){
