@@ -3,6 +3,17 @@ extends layout
 block content
   h1= title
   p   #{title} 
+  
+  div
+    input(
+    type='submit'
+    name='search'
+    ) 
+    input(
+    type='input'
+    name='search-box'
+    )
+  
   div
     a(href='/tube', class='ui-btn ui-shadow').
       نمایش لیست ویدیو ها
