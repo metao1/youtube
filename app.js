@@ -28,8 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.get('/search/:sh' ,function(req,res){
-    var sh = req.params.sh;
+app.get('/search/' ,function(req,res){
+    var sh = req.params.serach-box;
     request({uri: 'http://www.youtube.com/'+ sh +'/videos'}, function(err, response, body){
     var self = this;
     self.items = new Array();//I feel like I want to save my results in an array
