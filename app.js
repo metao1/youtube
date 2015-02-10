@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.post('/search' ,function(req,res){
+app.get('/search' ,function(req,res){
     var sh = req.body.serach_box;
     request({uri: 'http://www.youtube.com/'+ sh +'/videos'}, function(err, response, body){
     var self = this;
