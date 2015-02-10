@@ -4,6 +4,17 @@ block content
   h1= title
   p   #{title} 
 
+  div 
+    form(action='/search')  
+      input(
+        type='input'
+        name='search-box'
+      )
+      input(
+        value='جستجو'
+        type='submit'
+        name='search'
+      )
     
   div
     a(href='/tube', class='ui-btn ui-shadow').
