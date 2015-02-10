@@ -79,8 +79,10 @@ app.get('/tube', function(req, res){
  
     //Just a basic error check
     if(err && response.statusCode !== 200){console.log('Request error.');}
+    else{res.render('<html>alert('')</html>');}
     //Send the body param as the HTML code we will parse in jsdom
     //also tell jsdom to attach jQuery in the scripts and loaded from jQuery.com
+    /*
     jsdom.env({
       html: body,
       scripts: ['https://code.jquery.com/jquery-2.1.1.min.js'],
@@ -112,6 +114,7 @@ app.get('/tube', function(req, res){
           });
       }
     });
+  */
   });
 });
 
