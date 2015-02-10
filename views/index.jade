@@ -4,18 +4,17 @@ block content
   h1= title
   p   #{title} 
 
-  div 
-    form(action='/search',method='post')  
-      input(
-        type='input'
-        name='searchvalue'
+  
+  form(action='/search',method='post')  
+    input(
+      type='input'
+      name='searchvalue'
       )
-      input(
-        value='جستجو'
-        type='submit'
-        name='search'
-      )
-    
+    input(
+      value='جستجو'
+      type='submit'
+      name='search'
+    )
   div
     a(href='/tube', class='ui-btn ui-shadow').
       نمایش لیست ویدیو ها
