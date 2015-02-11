@@ -30,14 +30,19 @@ app.use('/', routes);
 app.use('/users', users);
 
 app.post('/search' ,function(req,res){
-    var sh = req.body.serachvalue;
+    var sh = req.body.searchvalue;
+    if(!sh){
+        return;        
+    }
     request({uri: 'http://www.youtube.com/'+ sh +'/videos'}, function(err, response, body){
     var self = this;
     self.items = new Array();//I feel like I want to save my results in an array
+ 
     //Just a basic error check
     if(err && response.statusCode !== 200){console.log('Request error.');}
     //Send the body param as the HTML code we will parse in jsdom
     //also tell jsdom to attach jQuery in the scripts and loaded from jQuery.com
+    
     jsdom.env({
       html: body,
       scripts: ['https://code.jquery.com/jquery-2.1.1.min.js'],
@@ -69,7 +74,16 @@ app.post('/search' ,function(req,res){
           });
       }
     });
-  })
+  
+  });
+});
+  
+app.get('/musics',function (req,res){
+   
+    res.render('musicslist', {
+              title: 'دنیای موزیک'
+             
+          });
 });
 
 app.get('/tube', function(req, res){
@@ -80,10 +94,9 @@ app.get('/tube', function(req, res){
  
     //Just a basic error check
     if(err && response.statusCode !== 200){console.log('Request error.');}
-    else{res.render('<html>alert('')</html>');}
     //Send the body param as the HTML code we will parse in jsdom
     //also tell jsdom to attach jQuery in the scripts and loaded from jQuery.com
-    /*
+    
     jsdom.env({
       html: body,
       scripts: ['https://code.jquery.com/jquery-2.1.1.min.js'],
@@ -115,7 +128,7 @@ app.get('/tube', function(req, res){
           });
       }
     });
-  */
+  
   });
 });
 
