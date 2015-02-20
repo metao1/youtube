@@ -29,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+
+
 app.post('/search' ,function(req,res){
     var sh = req.body.searchvalue;
     if(!sh){
@@ -79,19 +81,38 @@ app.post('/search' ,function(req,res){
 });
   
 app.get('/musics',function (req,res){
-   
+    var self  = this; 
+    self.items = new Array();
+    self.items[0] = {
+        href: '3OfPJaTQFAo',
+        title: 'Radio Germany',
+        time: '',
+        thumbnail: '//i.ytimg.com/vi/3OfPJaTQFAo/mqdefault.jpg',
+        urlObj: '87.230.101.50/top100station.mp3'
+    };
     res.render('musicslist', {
-              title: 'دنیای موزیک'
-             
-          });
+          title: 'دنیای موزیک',
+          items: self.items            
+    });  
+});
+
+app.get('/download/:id', function(req, res){
+    var id = req.params.id;
+    request('http://hippie-cement.codio.io:9090/?id=' + id, function(error, response, body) {
+         if(!error){
+            res.writeHead(200,{
+			    'Content-Length':body.length
+            });
+            res.write(body);
+         }
+    });
 });
 
 app.get('/tube', function(req, res){
   //Tell the request that we want to fetch youtube.com, send the results to a callback function
-  request({uri: 'http://www.youtube.com/mtv/videos'}, function(err, response, body){
+  request({uri: 'http://www.youtube.com/google/videos'}, function(err, response, body){
     var self = this;
     self.items = new Array();//I feel like I want to save my results in an array
- 
     //Just a basic error check
     if(err && response.statusCode !== 200){console.log('Request error.');}
     //Send the body param as the HTML code we will parse in jsdom
@@ -109,8 +130,7 @@ app.get('/tube', function(req, res){
                 var $a = $(item).find('.yt-lockup-thumbnail a'),
                 	$title = $(item).find('.yt-lockup-title a').text(),
                 	$time = $a.find('.video-time').text(),
-                    $img = $a.find('span.yt-thumb-clip img'); //thumbnail
-               
+                    $img = $a.find('span.yt-thumb-clip img'); //thumbnail               
 					 //and add all that data to my items array
                 self.items[i] = {
                     href: $a.attr('href'),
@@ -119,8 +139,7 @@ app.get('/tube', function(req, res){
                     thumbnail: $img.attr('src'),
                     urlObj: url.parse($a.attr('href'), true) //parse our URL and the query string as well
                 };
-            });
-          
+            });          
           //We have all we came for, now let's render our view
           res.render('list', {
               title: 'دنیای ویدیو',
@@ -128,7 +147,6 @@ app.get('/tube', function(req, res){
           });
       }
     });
-  
   });
 });
 
