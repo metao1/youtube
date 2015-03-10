@@ -24,16 +24,28 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/search',function(req,res){
+   var q = req.query.q,
+       part = req.query.part;
+       
+   if(!q){
+       return;        
+   } 
+   request({uri: 'https://www.googleapis.com/youtube/v3/search?type=video&maxResults=50&part='+part+''+'&q='+q+'&key=AIzaSyARSABX27_wqgECdGT9QPWMXNiFuqKU9VI'}, function(err, response, body){
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(body);   
+    });
+});
 
-app.post('/search' ,function(req,res){
-    var sh = req.body.searchvalue;
+app.get('/s' ,function(req,res){
+    var sh = req.query.searchvalue;
     if(!sh){
         return;        
     }
+    console.log('getting one request '+ sh);    
     request({uri: 'http://www.youtube.com/'+ sh +'/videos'}, function(err, response, body){
     var self = this;
-    self.items = new Array();//I feel like I want to save my results in an array
- 
+    self.items = new Array();
     //Just a basic error check
     if(err && response.statusCode !== 200){console.log('Request error.');}
     //Send the body param as the HTML code we will parse in jsdom
@@ -52,8 +64,6 @@ app.post('/search' ,function(req,res){
                 	$title = $(item).find('.yt-lockup-title a').text(),
                 	$time = $a.find('.video-time').text(),
                     $img = $a.find('span.yt-thumb-clip img'); //thumbnail
-               
-					 //and add all that data to my items array
                 self.items[i] = {
                     href: $a.attr('href'),
                     title: $title.trim(),
@@ -62,14 +72,10 @@ app.post('/search' ,function(req,res){
                     urlObj: url.parse($a.attr('href'), true) //parse our URL and the query string as well
                 };
             });
-          for(var items in self.items){
-              result.push({data:data,items:[items]});
-          }
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.write(JSON.stringify(result));
+          res.end("{data:{items:"+JSON.stringify(self.items)+"}}");
       }
     });
-  
   });
 });
   
@@ -105,9 +111,8 @@ app.get('/tube', function(req, res){
                     urlObj: url.parse($a.attr('href'), true) //parse our URL and the query string as well
                 };
             });       
-          result.push({data:'data',items:[self.items]});
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.write(JSON.stringify(result));
+          res.end("{data:{items:"+JSON.stringify(self.items)+"}}");
       }
     });
   });

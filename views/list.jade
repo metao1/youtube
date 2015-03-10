@@ -2,7 +2,7 @@ extends layout
 
 block content
   header(data-role='header')
-    h1= title
+    h1= item
   div(data-role='content')
     if items.length
       //create a listview wrapper
@@ -12,9 +12,9 @@ block content
           //create a li
           li
             //and a link using our passed urlObj Object
-            a(href='/watch/' + item['urlObj'].query.v, title=item['title'])
+            a(href='/watch/' + item['urlObj'].query.v+'/'+item['title'] title=item['title'])
               //and a thumbnail
-              img(src=item['thumbnail'], alt='Thumbnail')
+              img(src='http://hippie-cement.codio.io:2829/q?image='+ item['urlObj'].query.v, alt='Thumbnail')
               //title and time label
               h3= item['title']
               h5= item['time']
