@@ -8,7 +8,7 @@
   },
   "main": "image.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node image.js"
   },
   "dependencies": {
     "express": "~4.2.0",
