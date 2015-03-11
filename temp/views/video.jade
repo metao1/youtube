@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  div(data-role='page')
+    header(data-role='header')
+      h1= title
+    div(data-role='content')
+      //Our video div
+      div#video
+        #jquery_jplayer_1.jp-jplayer
+        #jp_container_1
+            .jp-gui.ui-widget.ui-widget-content.ui-corner-all
+                ul
+                    li.jp-play.ui-state-default.ui-corner-all
+                        a.jp-play.ui-icon.ui-icon-play(href='javascript:;', tabindex='1', title='play')
+                        | play
+                    li.jp-pause.ui-state-default.ui-corner-all
+                        a.jp-pause.ui-icon.ui-icon-pause(href='javascript:;', tabindex='1', title='pause') pause
+                    li.jp-stop.ui-state-default.ui-corner-all
+                        a.jp-stop.ui-icon.ui-icon-stop(href='javascript:;', tabindex='1', title='stop') stop
+                    li.jp-repeat.ui-state-default.ui-corner-all
+                        a.jp-repeat.ui-icon.ui-icon-refresh(href='javascript:;', tabindex='1', title='repeat') repeat
+                    li.jp-repeat-off.ui-state-default.ui-state-active.ui-corner-all
+                        a.jp-repeat-off.ui-icon.ui-icon-refresh(href='javascript:;', tabindex='1', title='repeat off') repeat off
+                    li.jp-mute.ui-state-default.ui-corner-all
+                        a.jp-mute.ui-icon.ui-icon-volume-off(href='javascript:;', tabindex='1', title='mute') mute
+                    li.jp-unmute.ui-state-default.ui-state-active.ui-corner-all
+                        a.jp-unmute.ui-icon.ui-icon-volume-off(href='javascript:;', tabindex='1', title='unmute') unmute
+                    li.jp-volume-max.ui-state-default.ui-corner-all
+                        a.jp-volume-max.ui-icon.ui-icon-volume-on(href='javascript:;', tabindex='1', title='max volume') max volume
+                            .jp-progress-slider
+                            .jp-volume-slider
+                            .jp-current-time
+                            .jp-duration
+                            .jp-clearboth
+                            .jp-no-solution
+        span Update Required
+        | 				To play the media you will need to either update your browser to a recent version or update your 
+        a(href='http://get.adobe.com/flashplayer/', target='_blank') Flash plugin
+        | .
+        a(href='/download/'+vid,target='_blank').
+          دانلود
+        a(href='/tube', class='ui-btn ui-shadow').
+          ویدیو ها
+        a(href='/', class='ui-btn ui-shadow').
+          صفحه اصلی
+        
