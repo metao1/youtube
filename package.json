@@ -1,4 +1,4 @@
-{
+mage{
   "name": "nodetube",
   "version": "0.0.1",
   "private": true,
@@ -6,9 +6,9 @@
     "node": "0.10.33",
     "npm": "1.4.28"
   },
-  "main": "app.js",
+  "main": "image.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node image.js"
   },
   "dependencies": {
     "express": "~4.2.0",
