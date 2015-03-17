@@ -14,7 +14,7 @@ block content
             //and a link using our passed urlObj Object
             a(href='/watch/' + item['urlObj'].query.v+'/'+item['title'] title=item['title'])
               //and a thumbnail
-              img(src='http://hippie-cement.codio.io:2829/q?image='+ item['urlObj'].query.v, alt='Thumbnail')
+              img(src='http://metaoimage.heroku.com/q?image='+ item['urlObj'].query.v, alt='Thumbnail')
               //title and time label
               h3= item['title']
               h5= item['time']
