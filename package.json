@@ -1,14 +1,14 @@
-mage{
-  "name": "nodetube",
+{
+  "name": "metao",
   "version": "0.0.1",
   "private": true,
   "engines": {
     "node": "0.10.33",
     "npm": "1.4.28"
   },
-  "main": "image.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node image.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "~4.2.0",
