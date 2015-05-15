@@ -1,5 +1,4 @@
 extends layout
-
 block content
   div(data-role='page')
     header(data-role='header')
@@ -8,10 +7,7 @@ block content
       //Our video div
       div#video
         div#classflowplayer
-   	  video(src="hippie-cement-9090.codio.io/"+vid)
-      //Iframe from  youtube which serves the right media object for the device in use
-        
-      <!-- fallback -->
+         video(src="hippie-cement-9090.codio.io/"+vid)
       div
         a(href='/download/'+vid,target="_blank")
           دانلود
