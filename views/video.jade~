@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  div(data-role='page')
+    header(data-role='header')
+      h1= title
+    div(data-role='content')
+      //Our video div
+      div#video
+        div#classflowplayer
+   	  video(src="hippie-cement-9090.codio.io/"+vid)
+      //Iframe from  youtube which serves the right media object for the device in use
+        
+      <!-- fallback -->
+      div
+        a(href='/download/'+vid,target="_blank")
+          دانلود
+        a(href='/tube', class='ui-btn ui-shadow').
+          ویدیو ها
+        a(href='/', class='ui-btn ui-shadow').
+          صفحه اصلی
+        
